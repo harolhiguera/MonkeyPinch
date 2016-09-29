@@ -13,8 +13,14 @@ import AVFoundation
 
 class ViewController: UIViewController,  UIGestureRecognizerDelegate {
     
+    @IBOutlet var monkeyPan: UIPanGestureRecognizer!
+    @IBOutlet var bananaPan: UIPanGestureRecognizer!
     
     var chompPlayer:AVAudioPlayer?
+    var ringPlayer:AVAudioPlayer?
+    
+    
+    
     
     func loadSound(filename:NSString) -> AVAudioPlayer {
         
@@ -36,6 +42,8 @@ class ViewController: UIViewController,  UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         
         //1 Create a filtered array of just the monkey and banana image views.
         //let filteredSubviews = self.view.subviews.filter({$0.isKind(of: UIImageView.self)})
@@ -50,9 +58,22 @@ class ViewController: UIViewController,  UIGestureRecognizerDelegate {
             view.addGestureRecognizer(recognizer)
             
             //TODO: Add a custom gesture recognizer too
-        }
+            
+            let recognizer2 = TickleGestureRecognizer(target: self, action: #selector(handleTickle))
+            recognizer2.delegate = self
+            view.addGestureRecognizer(recognizer2)
+
+            
+            // Now the tap gesture recognizer will only get called if no pan is detected.
+            
+            recognizer.require(toFail: monkeyPan)
+            recognizer.require(toFail: bananaPan)
+            
+            
+                   }
         
         self.chompPlayer = self.loadSound(filename: "Mario")
+        self.ringPlayer = self.loadSound(filename: "ring")
     }
 
     
@@ -132,10 +153,16 @@ class ViewController: UIViewController,  UIGestureRecognizerDelegate {
         return true
     }
     
+    // MARK: Callbacks
+    
     func handleTap(recognizer: UITapGestureRecognizer) {
         self.chompPlayer?.play()
     }
     
+    
+    func handleTickle(recognizer:TickleGestureRecognizer) {
+        self.ringPlayer?.play()
+    }
     
     
 }
