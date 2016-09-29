@@ -47,6 +47,8 @@
 		CEA314B51D9CE02600B1F98D /* MonkeyPinchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeyPinchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA314B91D9CE02600B1F98D /* MonkeyPinchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyPinchUITests.swift; sourceTree = "<group>"; };
 		CEA314BB1D9CE02600B1F98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA314C81D9CE09800B1F98D /* chomp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chomp.caf; sourceTree = "<group>"; };
+		CEA314C91D9CE09800B1F98D /* hehehe1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hehehe1.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		CEA314981D9CE02600B1F98D /* MonkeyPinch */ = {
 			isa = PBXGroup;
 			children = (
+				CEA314C71D9CE08A00B1F98D /* Resources */,
 				CEA314991D9CE02600B1F98D /* AppDelegate.swift */,
 				CEA3149B1D9CE02600B1F98D /* ViewController.swift */,
 				CEA3149D1D9CE02600B1F98D /* Main.storyboard */,
@@ -123,6 +126,15 @@
 				CEA314BB1D9CE02600B1F98D /* Info.plist */,
 			);
 			path = MonkeyPinchUITests;
+			sourceTree = "<group>";
+		};
+		CEA314C71D9CE08A00B1F98D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEA314C81D9CE09800B1F98D /* chomp.caf */,
+				CEA314C91D9CE09800B1F98D /* hehehe1.caf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
