@@ -7,19 +7,66 @@
 //
 
 import UIKit
+import AVFoundation
+
+
 
 class ViewController: UIViewController,  UIGestureRecognizerDelegate {
+    
+    
+    var chompPlayer:AVAudioPlayer?
+    
+    func loadSound(filename:NSString) -> AVAudioPlayer {
+        
+        let url = Bundle.main.path(forResource: filename as String, ofType: "mp3")
+     
+        print("URL: \(url)")
+        do{
+            chompPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: url!))
+            chompPlayer?.prepareToPlay()
+            
+        }catch {
+        
+        }
+        return chompPlayer!
+    }
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //1 Create a filtered array of just the monkey and banana image views.
+        //let filteredSubviews = self.view.subviews.filter({$0.isKind(of: UIImageView.self)})
+        let filteredSubviews = self.view.subviews.flatMap({$0 as? UIImageView})
+        
+        // 2 Cycle through the filtered array
+        for view in filteredSubviews  {
+            // 3  Create a UITapGestureRecognizer for each image view, specifying the callback. This is an alternative way of adding gesture recognizers. It can be added the recognizers to the storyboard.
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            // 4 Set the delegate of the recognizer programatically, and add the recognizer to the image view.
+            recognizer.delegate = self
+            view.addGestureRecognizer(recognizer)
+            
+            //TODO: Add a custom gesture recognizer too
+        }
+        
+        self.chompPlayer = self.loadSound(filename: "Mario")
     }
 
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+
+    
+    
     @IBAction func handlePan(recognizer:UIPanGestureRecognizer) {
         
         let translation = recognizer.translation(in: self.view)
@@ -84,6 +131,11 @@ class ViewController: UIViewController,  UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    func handleTap(recognizer: UITapGestureRecognizer) {
+        self.chompPlayer?.play()
+    }
+    
     
     
 }
